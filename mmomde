@@ -214,7 +214,7 @@ def kuis_fashion_style():
             print("❌ Input salah! Masukkan Y untuk ya atau N untuk tidak.")
             
         if ulang == 'N':
-            print("\nTerima kasih sudah mencoba FaSHion : Show Your Fits! Bye~ 👋💖")
+            print("\nTerima kasih sudah mencoba FaSHion : Show Your Fits! Bye~")
             break
 
 if __name__ == "__main__":
