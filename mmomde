@@ -167,7 +167,5 @@ def kuis_fashion_style():
     for style, jumlah in skor_style.most_common():
         print(f"- {style.capitalize()}: {jumlah} poin")
 
- # 5. jawaban = input(f"Jawabanmu ({'/'.join(pilihan_valid)}): ").strip().upper()
-
 if __name__ == "__main__":
     kuis_fashion_style()
