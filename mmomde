@@ -1,0 +1,221 @@
+from collections import Counter
+import time
+
+def kuis_fashion_style():
+    # =========================================================================
+    # 5. IMPROVEMENT: MENAMBAHKAN PESAN LUCU & DESKRIPSI UNIK UNTUK TIAP STYLE
+    # =========================================================================
+    DESKRIPSI_STYLE = {
+        "casual": "Kamu tipe yang mengutamakan kenyamanan! Kaos, jeans, dan cardigan adalah jalan ninjamu. Tetap kelihatan santai tapi rapi!",
+        "minimalist": "Less is more! Bagimu, warna netral dan potongan baju simpel itu udah paling berkelas. Lemarimu pasti estetik banget.",
+        "streetwear": "Kece banget! Kamu suka pakaian yang bold, oversized, dan selalu up-to-date sama tren anak muda masa kini.",
+        "y2k": "Vibes tahun 2000-an yang penuh warna, aksesoris gemas, dan berani tampil beda. Gaya kamu bener-bener ikonik!",
+        "emo": "Misterius dan penuh ekspresi deep. Suka pakaian gelap dengan aksen boots yang ngasih kesan cool dan emosional.",
+        "goth": "Dramatis, elegan, dan didominasi warna hitam. Kamu punya aura yang kuat dan karismatik lewat fashion-mu!",
+        "academia": "Vibes kutubuku yang estetik, rapi, dan menawan. Kemeja, loafers, dan warna warm-tone bikin kamu kelihatan cerdas banget!",
+        "vintage": "Klasik dan menyukai hal-hal indah dari masa lalu. Pakaian thrift shop atau gaya retro bikin penampilanmu unik dan bernilai seni tinggi!",
+        "downtown": "Gaya khas anak kota yang indie, gemar menjelajah, dan pinter memadukan baju kasual dengan sneakers yang eye-catching!",
+        "gyaru": "Pede, mandiri, dan suka jadi pusat perhatian dengan makeup atau pakaian yang glamour dan mencolok. You look stunning!"
+    }
+
+    # =========================================================================
+    # 5. IMPROVEMENT: FITUR ULANG PERMAINAN (MENGGUNAKAN LOOPING WHILE TRUE)
+    # =========================================================================
+    while True:
+        # 3. PLAN: INPUT DATA (15 PERTANYAAN SESUAI DATA KAMU)
+        daftar_pertanyaan = [
+            {
+                "soal": "Gimana kamu menilai kepribadianmu?",
+                "pilihan": [
+                    {"teks": "A. Simpel, anti ribet, dan seadanya.", "styles": ["casual", "minimalist"]},
+                    {"teks": "B. Aku seorang yang gampang berempati, sedikit sensitif, dan menyukai hal yang indah.", "styles": ["vintage", "academia"]},
+                    {"teks": "C. Aku orang yang gampang bergaul, humoris, dan petualang.", "styles": ["streetwear", "y2k", "downtown"]},
+                    {"teks": "D. Aku, sih orang yang pede, mandiri, dan blak-blakan, ya.", "styles": ["emo", "goth"]}
+                ]
+            },
+            {
+                "soal": "Prioritas utamamu saat mencari baju adalah ...",
+                "pilihan": [
+                    {"teks": "A. Yang penting simpel.", "styles": ["minimalist"]},
+                    {"teks": "B. Yang penting menawan.", "styles": ["vintage", "academia"]},
+                    {"teks": "C. Yang penting nyaman.", "styles": ["casual", "streetwear", "downtown"]},
+                    {"teks": "D. Yang penting kece.", "styles": ["emo", "goth", "y2k"]}
+                ]
+            },
+            {
+                "soal": "Berapa lama kamu memilih baju?",
+                "pilihan": [
+                    {"teks": "A. Kurang lebih 10 menitan.", "styles": ["casual", "streetwear", "downtown"]},
+                    {"teks": "B. Kurang lebih satu jam, karena enggak pengin salah kostum.", "styles": ["academia", "vintage"]},
+                    {"teks": "C. Kurang dari 5 menit, ambil apapun yang terlihat mata.", "styles": ["minimalist"]},
+                    {"teks": "D. Terlalu lama! Aku biasanya mencoba beragam baju sebelum menentukan satu pilihan.", "styles": ["emo", "goth", "y2k"]}
+                ]
+            },
+            {
+                "soal": "Fashion item kesukaanmu adalah ...",
+                "pilihan": [
+                    {"teks": "A. Kaos.", "styles": ["casual", "minimalist"]},
+                    {"teks": "B. Aksesoris keren.", "styles": ["vintage", "academia"]},
+                    {"teks": "C. Jeans.", "styles": ["streetwear", "downtown"]},
+                    {"teks": "D. Apapun dengan motif yang ramai dan unik.", "styles": ["emo", "goth", "y2k"]}
+                ]
+            },
+            {
+                "soal": "Sepatu seperti apa yang biasanya sering kamu pakai?",
+                "pilihan": [
+                    {"teks": "A. Flat shoes", "styles": ["casual", "minimalist", "academia"]},
+                    {"teks": "B. Sneakers", "styles": ["downtown", "streetwear", "y2k"]},
+                    {"teks": "C. Boots.", "styles": ["goth", "emo"]}
+                ]
+            },
+            {
+                "soal": "Kalau lagi jalan-jalan di mall, toko mana yang pasti kamu kunjungi?",
+                "pilihan": [
+                    {"teks": "A. Toko brand lokal dengan desain unik", "styles": ["y2k", "emo", "goth"]},
+                    {"teks": "B. Butik desainer ternama", "styles": ["academia", "casual"]},
+                    {"teks": "C. Fashion thrift shop", "styles": ["minimalist", "vintage", "downtown", "streetwear"]}
+                ]
+            },
+            {
+                "soal": "Apa yang kamu pilih untuk acara hangout sore di cafe kekinian?",
+                "pilihan": [
+                    {"teks": "A. Kemeja", "styles": ["minimalist", "academia", "vintage"]},
+                    {"teks": "B. Basic outfit dengan cardigan", "styles": ["casual"]},
+                    {"teks": "C. Jeans favorit dengan baju vintage", "styles": ["streetwear", "downtown"]},
+                    {"teks": "D. Outfit dengan banyak aksesoris", "styles": ["emo", "goth", "y2k"]}
+                ]
+            },
+            {
+                "soal": "Desain sepatu apa yang paling kamu suka?",
+                "pilihan": [
+                    {"teks": "A. Sneakers yang eye catching", "styles": ["streetwear", "downtown"]},
+                    {"teks": "B. Sepatu kulit", "styles": ["academia", "vintage"]},
+                    {"teks": "C. Sandal slip-on / crocs", "styles": ["casual", "vintage"]},
+                    {"teks": "D. Boots second (hidden gem)", "styles": ["y2k", "emo", "goth"]}
+                ]
+            },
+            {
+                "soal": "Apa warna utama dari koleksi pakaian kamu?",
+                "pilihan": [
+                    {"teks": "A. Warna-warna ceria kayak kuning dan hijau", "styles": ["y2k", "casual"]},
+                    {"teks": "B. Gradasi netral seperti hitam, putih, dan abu abu", "styles": ["minimalist", "streetwear", "downtown", "emo", "goth"]},
+                    {"teks": "C. Warm tone seperti coklat dan maroon", "styles": ["vintage", "academia"]}
+                ]
+            },
+            {
+                "soal": "Bagaimana caramu mengungkapkan diri lewat fashion?",
+                "pilihan": [
+                    {"teks": "A. Melalui pernak pernik aksesoris lucu", "styles": ["y2k", "emo", "goth"]},
+                    {"teks": "B. Pakaian yang elegan dan glamour", "styles": ["academia", "casual", "vintage"]},
+                    {"teks": "C. Style yang nyaman dan simple", "styles": ["minimalist", "streetwear", "downtown"]}
+                ]
+            },
+            {
+                "soal": "Apa manfaat fashion bagi kalian?",
+                "pilihan": [
+                    {"teks": "A. Jadi lebih percaya diri", "styles": ["emo", "goth", "gyaru", "y2k"]},
+                    {"teks": "B. Hanya untuk penampilan", "styles": ["casual", "vintage", "academia"]},
+                    {"teks": "C. Tidak ada", "styles": ["minimalist", "casual", "streetwear", "downtown"]},
+                    {"teks": "D. Membuat orang lain terkesan", "styles": ["goth", "emo", "y2k"]}
+                ]
+            },
+            {
+                "soal": "Apa yang saat kalian rasakan saat menemukan outfit yang cocok?",
+                "pilihan": [
+                    {"teks": "A. Bingung", "styles": ["academia"]},
+                    {"teks": "B. Percaya diri", "styles": ["goth", "y2k", "academia", "emo", "casual", "vintage"]},
+                    {"teks": "C. Tidak peduli", "styles": ["minimalist", "downtown", "streetwear"]}
+                ]
+            },
+            {
+                "soal": "Apa yang bisa meningkatkan rasa percaya diri?",
+                "pilihan": [
+                    {"teks": "A. Penampilan yang menarik", "styles": ["emo", "goth", "gyaru", "y2k"]},
+                    {"teks": "B. Kualitas bahan pakaian", "styles": ["vintage", "academia"]},
+                    {"teks": "C. Harga pakaian yang terjangkau", "styles": ["vintage", "streetwear", "downtown", "casual", "minimalist"]},
+                    {"teks": "D. Model pakaian trendy", "styles": ["casual", "minimalist"]}
+                ]
+            },
+            {
+                "soal": "Bagaimana pandanganmu mengenai tren make up saat ini?",
+                "pilihan": [
+                    {"teks": "A. Sangat menyukainya karena terlihat keren", "styles": ["y2k", "gyaru"]},
+                    {"teks": "B. Biasa saja", "styles": ["casual", "minimalist"]},
+                    {"teks": "C. Tidak suka, terlalu berlebihan", "styles": ["emo", "goth", "academia"]}
+                ]
+            },
+            {
+                "soal": "Warna lipstik apa yang paling menarik perhatianmu?",
+                "pilihan": [
+                    {"teks": "A. Warna yang gelap (maroon, hitam, coklat tua)", "styles": ["goth", "emo", "vintage"]},
+                    {"teks": "B. Warna yang cerah/nude (pink soft, peach)", "styles": ["casual", "minimalist", "academia"]},
+                    {"teks": "C. Warna yang mencolok (merah terang, glossy pink)", "styles": ["y2k", "gyaru", "streetwear", "downtown"]}
+                ]
+            }
+        ]
+
+        skor_style = Counter()
+
+        print("\n==================================================")
+        print("            FaSHion : Show Your Fits!             ")
+        print("      Cari tahu fashion style tersembunyimu      ")
+        print("==================================================\n")
+
+        # 3. PLAN: PROSES PERULANGAN SOAL
+        for i, item in enumerate(daftar_pertanyaan, 1):
+            print(f"{i}. {item['soal']}")
+            
+            # Membuat batas pilihan secara dinamis (A-C, A-D, atau A-E)
+            pilihan_valid = [chr(65 + idx) for idx in range(len(item['pilihan']))]
+            
+            for opsi in item['pilihan']:
+                print(opsi['teks'])
+            
+            # =========================================================================
+            # 5. IMPROVEMENT: VALIDASI INPUT KOSONG / INPUT SALAH KETIK (.strip().upper())
+            # =========================================================================
+            while True:
+                jawaban = input(f"Jawabanmu ({'/'.join(pilihan_valid)}): ").strip().upper()
+                if jawaban == "":
+                    print("❌ Input tidak boleh kosong! Harap ketik pilihanmu.")
+                elif jawaban in pilihan_valid:
+                    indeks_pilihan = pilihan_valid.index(jawaban)
+                    styles_terpilih = item['pilihan'][indeks_pilihan]['styles']
+                    for s in styles_terpilih:
+                        skor_style[s] += 1
+                    print("-" * 50)
+                    break
+                else:
+                    print(f"❌ Pilihan salah! Harap pilih huruf antara {' atau '.join(pilihan_valid)}.")
+
+        print("\n🔄 Sedang menganalisis seleramu...")
+        time.sleep(1.5)
+
+        # MENGHITUNG SKOR TERTINGGI (PROSES IPO)
+        style_dominan = skor_style.most_common(1)[0][0]
+
+        # 3. PLAN: OUTPUT HASIL KUIS
+        print("\n" + "="*18 + " FaSHion SHOW RESULTS " + "="*18)
+        print(f" Gaya pakaian yang paling cocok buat kamu adalah: ✨ {style_dominan.upper()} ✨")
+        print(f" Penjelasan: {DESKRIPSI_STYLE[style_dominan]}")
+        print("=" * 58)
+        
+        print("\nDetail perolehan poin gayamu:")
+        for style, jumlah in skor_style.most_common():
+            print(f"- {style.capitalize()}: {jumlah} poin")
+
+        # =========================================================================
+        # 5. IMPROVEMENT: KONFIRMASI MENU UNTUK MENGULANG PROGRAM
+        # =========================================================================
+        while True:
+            ulang = input("\nApakah temanmu ingin mencoba kuis ini juga? (Y/N): ").strip().upper()
+            if ulang in ['Y', 'N']:
+                break
+            print("❌ Input salah! Masukkan Y untuk ya atau N untuk tidak.")
+            
+        if ulang == 'N':
+            print("\nTerima kasih sudah mencoba FaSHion : Show Your Fits! Bye~ 👋💖")
+            break
+
+if __name__ == "__main__":
+    kuis_fashion_style()
