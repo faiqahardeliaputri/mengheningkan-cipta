@@ -1,0 +1,27 @@
+Mulai
+Inisialisasi SKOR_STYLE sebagai kamus kosong (Counter)
+Inisialisasi DAFTAR_PERTANYAAN berisi 13 soal beserta pilihan teks dan bobot style-nya
+
+Tampilkan Judul "FaSHion : Show Your Fits!"
+
+Untuk setiap PERTANYAAN di dalam DAFTAR_PERTANYAAN lakukan:
+    Tampilkan nomor soal dan teks soal
+    Tampilkan opsi jawaban yang tersedia (A, B, C, D)
+    
+    Selagi TRUE lakukan:
+        Input JAWABAN_USER
+        Ubah JAWABAN_USER menjadi huruf kapital dan hapus spasi tambahan
+        
+        Jika JAWABAN_USER ada di dalam daftar pilihan yang valid maka:
+            Ambil daftar STYLES yang terkait dengan pilihan tersebut
+            Untuk setiap GAYA di dalam STYLES lakukan:
+                Tambahkan SKOR_STYLE[GAYA] sebesar 1 poin
+            Keluar dari loop input (Break)
+        Lain halnya:
+            Tampilkan "Jawaban salah! harap pilih sesuai yang ada di pertanyaan."
+    
+Cari STYLE_DOMINAN dengan nilai tertinggi dari SKOR_STYLE
+
+Tampilkan "Gaya pakaian yang paling cocok buat kamu adalah: STYLE_DOMINAN"
+Tampilkan detail perolehan semua poin gaya fashion dari yang tertinggi ke terendah
+Selesai
