@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>FaSHion : Show Your Fits!</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10/brython.min.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 30px; line-height: 1.6; }
+        select { padding: 5px; width: 100%; max-width: 500px; margin-bottom: 15px; display: block; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #ff4081; color: white; border: none; border-radius: 5px; }
+        button:hover { background-color: #f50057; }
+        #hasil { margin-top: 20px; padding: 15px; border-left: 5px solid #ff4081; background-color: #fff0f5; }
+    </style>
+</head>
+<body onload="brython()">
+
+    <h1>==================================================</h1>
+    <h1>            FaSHion : Show Your Fits!             </h1>
+    <h3>      Cari tahu fashion style tersembunyimu      </h3>
+    <h1>==================================================</h1>
+
+    <form onsubmit="return false;">
+        
+        <p><b>1. Gimana kamu menilai kepribadianmu?</b></p>
+        <select id="q1">
+            <option value="2">A. Simpel, anti ribet, dan seadanya.</option>
+            <option value="3">B. Aku seorang yang gampang berempati, sedikit sensitif, dan menyukai hal yang indah.</option>
+            <option value="4">C. Aku orang yang gampang bergaul, humoris, dan petualang.</option>
+            <option value="1">D. Aku, sih orang yang pede, mandiri, dan blak-blakan, ya.</option>
+        </select>
+
+        <p><b>2. Prioritas utamamu saat mencari baju adalah ...</b></p>
+        <select id="q2">
+            <option value="2">A. Yang penting simpel.</option>
+            <option value="3">B. Yang penting menawan.</option>
+            <option value="2">C. Yang penting nyaman.</option>
+            <option value="4">D. Yang penting kece.</option>
+        </select>
+
+        <p><b>3. Berapa lama kamu memilih baju?</b></p>
+        <select id="q3">
+            <option value="2">A. Kurang lebih 10 menitan.</option>
+            <option value="3">B. Kurang lebih satu jam, karena enggak pengin salah kostum.</option>
+            <option value="2">C. Kurang dari 5 menit, ambil apapun yang terlihat mata.</option>
+            <option value="4">D. Terlalu lama! Aku biasanya mencoba beragam baju sebelum menentukan satu pilihan.</option>
+        </select>
+
+        <p><b>4. Fashion item kesukaanmu adalah ...</b></p>
+        <select id="q4">
+            <option value="2">A. Kaos.</option>
+            <option value="3">B. Aksesoris keren.</option>
+            <option value="4">C. Jeans.</option>
+            <option value="1">D. Apapun dengan motif yang ramai dan unik.</option>
+        </select>
+
+        <p><b>5. Sepatu seperti apa yang biasanya sering kamu pakai?</b></p>
+        <select id="q5">
+            <option value="2">A. Flat shoes</option>
+            <option value="4">B. Sneakers</option>
+            <option value="1">C. Boots.</option>
+        </select>
+
+        <p><b>6. Kalau lagi jalan - jalan di mall, toko mana yang pasti kamu kunjungi?</b></p>
+        <select id="q6">
+            <option value="4">A. Toko brand lokal dengan desain unik</option>
+            <option value="2">B. Butik desainer ternama</option>
+            <option value="3">C. Fashion thrift shop</option>
+        </select>
+
+        <p><b>7. Apa yang kamu pilih untuk acara hangout sore di cafe kekinian?</b></p>
+        <select id="q7">
+            <option value="3">A. Kemeja</option>
+            <option value="2">B. Basic outfit dengan cardigan</option>
+            <option value="4">C. Jeans favorit dengan baju vintage</option>
+            <option value="1">D. Outfit dengan banyak aksesoris</option>
+        </select>
+
+        <p><b>8. Desain sepatu apa yang paling kamu suka?</b></p>
+        <select id="q8">
+            <option value="4">A. Sneakers yang eye catching</option>
+            <option value="3">B. Sepatu kulit</option>
+            <option value="2">C. Sandal slip-on / crocs</option>
+            <option value="1">D. Boots second (hidden gem)</option>
+        </select>
+
+        <p><b>9. Apa warna utama dari koleksi pakaian kamu?</b></p>
+        <select id="q9">
+            <option value="4">A. Warna-warna ceria kayak kuning dan hijau</option>
+            <option value="2">B. Gradasi netral seperti hitam, putih, dan abu abu</option>
+            <option value="3">C. Warm tone seperti coklat dan maroon</option>
+        </select>
+
+        <p><b>10. Bagaimana caramu mengungkapkan diri lewat fashion?</b></p>
+        <select id="q10">
+            <option value="4">A. Melalui pernak pernik aksesoris lucu</option>
+            <option value="3">B. Pakaian yang elegan dan glamour</option>
+            <option value="2">C. Style yang nyaman dan simple</option>
+        </select>
+
+        <p><b>11. Apa manfaat fashion bagi kalian?</b></p>
+        <select id="q11">
+            <option value="4">A. Jadi lebih percaya diri</option>
+            <option value="3">B. Hanya untuk penampilan</option>
+            <option value="2">C. Tidak ada</option>
+            <option value="1">D. Membuat orang lain terkesan</option>
+        </select>
+
+        <p><b>12. Apa yang saat kalian rasakan saat menemukan outfit yang cocok?</b></p>
+        <select id="q12">
+            <option value="3">A. Bingung</option>
+            <option value="4">B. Percaya diri</option>
+            <option value="2">C. Tidak peduli</option>
+        </select>
+
+        <p><b>13. Apa yang bisa meningkatkan rasa percaya diri?</b></p>
+        <select id="q13">
+            <option value="4">A. Penampilan yang menarik</option>
+            <option value="3">B. Kualitas bahan pakaian</option>
+            <option value="2">C. Harga pakaian yang terjangkau</option>
+            <option value="2">D. Model pakaian trendy</option>
+        </select>
+
+        <br><br>
+        <button id="submit">Cek Hasil Style Kamu</button>
+    </form>
+
+    <br>
+    <div id="hasil"><i>Hasil kuis kamu akan muncul di sini setelah tombol diklik...</i></div>
+
+    <script type="text/python">
+        from browser import document
+
+        def cek(ev):
+            total = 0
+            
+            # Mengambil nilai angka dari q1 sampai q13, lalu dijumlahkan
+            for i in range(1, 14):
+                nilai = int(document[f"q{i}"].value)
+                total += nilai
+                
+            # Logika pembagian hasil berdasarkan total skor
+            if total >= 42:
+                style = "STREETWEAR / Y2K"
+                detail = "Gaya kamu bold, penuh warna, dan selalu up-to-date sama tren masa kini!"
+            elif total >= 32:
+                style = "ACADEMIA / VINTAGE"
+                detail = "Kamu suka vibes yang estetik, rapi, klasik, dan kelihatan cerdas banget!"
+            elif total >= 22:
+                style = "CASUAL / MINIMALIST"
+                detail = "Kamu tipe yang mengutamakan kenyamanan! Simpel, anti ribet, tapi tetep rapi dan enak dilihat."
+            else:
+                style = "EMO / GOTH"
+                detail = "Misterius, penuh ekspresi, cool, dan didominasi aura warna gelap yang kuat!"
+
+            # Menggunakan .html agar browser bisa membaca tag <br> dan <b> (teks jadi rapi)
+            document["hasil"].html = f"<h3>Fashion Style kamu adalah:<br><b style='color:#ff4081; font-size:24px;'>{style}</b></h3><p>{detail}</p><small>Total Skor Anda: {total}</small>"
+
+        # Menghubungkan fungsi klik tombol dengan fungsi cek di atas
+        document["submit"].bind("click", cek)
+    </script>
+
+</body>
+</html>
