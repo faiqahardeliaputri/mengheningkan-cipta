@@ -1,1 +1,0 @@
-# mengheningkan-cipta
