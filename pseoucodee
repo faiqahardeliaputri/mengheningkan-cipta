@@ -1,0 +1,96 @@
+ALGORITMA KuisFashionStyle
+
+DEKLARASI
+    // Kamus data untuk menyimpan skor setiap style fashion
+    DEKLARE styles AS DICTIONARY OF {STRING: INTEGER}
+    styles <- {"casual": 0, "minimalist": 0, "vintage": 0, "academia": 0, 
+               "streetwear": 0, "y2k": 0, "downtown": 0, "emo": 0, "goth": 0, "gyaru": 0}
+
+    // Struktur data pertanyaan, pilihan jawaban, dan poin style terkait
+    DEKLARE questions AS LIST OF DICTIONARY
+    questions <- [
+        {
+            "question": "Misalnya kamu lagi nge-scroll sosmed...",
+            "options": {
+                "a": ("Foto ala Pinterest...", ["academia", "minimalist", "vintage"]),
+                "b": ("Mirror selfie...", ["goth", "emo", "downtown"]),
+                "c": ("Gaya tabrak warna...", ["streetwear", "y2k", "gyaru", "casual"])
+            }
+        },
+        // ... (dan seterusnya untuk pertanyaan 2 sampai 5)
+    ]
+
+    DEKLARE quiz_div, result_div AS DOM_ELEMENT
+    DEKLARE submit_btn AS BUTTON_ELEMENT
+
+|--- UTAMA (RENDER TAMPILAN KUIS) ---
+|
+|   quiz_div <- AMBIL_ELEMEN_HTML_BY_ID("quiz")
+|
+|   // Perulangan untuk memunculkan pertanyaan ke layar browser
+|   FOR i FROM 0 TO LENGTH(questions) - 1 DO
+|       TAMPILKAN_TEKS_H3(i + 1 + ". " + questions[i]["question"]) DI DALAM quiz_div
+|
+|       // Perulangan untuk memunculkan pilihan jawaban dari pertanyaan terkait
+|       FOR EACH key, (text, points) IN questions[i]["options"] DO
+|           radio <- BUAT_ELEMEN_INPUT(TYPE="radio", NAME="q" + i, VALUE=key)
+|           label <- BUAT_ELEMEN_LABEL(TEXT=key + ". " + text)
+|           container <- BUAT_ELEMEN_DIV(CLASS="option")
+|           
+|           MASUKKAN radio DAN label KE DALAM container
+|           MASUKKAN container KE DALAM quiz_div
+|       END FOR
+|   END FOR
+|
+|   submit_btn <- BUAT_ELEMEN_BUTTON(TEXT="Lihat Hasil")
+|   MASUKKAN submit_btn KE DALAM quiz_div
+|
+|   // Menghubungkan tombol klik dengan fungsi kalkulasi hasil
+|   HUBUNGKAN_EVENT(submit_btn, CLICK_EVENT, KELOLA_FUNGSI calculate)
+|
+|--- END UTAMA ---
+
+
+|--- FUNGSI calculate(event) ---
+|
+|   // Reset semua skor style menjadi 0 sebelum menghitung ulang
+|   FOR EACH style IN styles DO
+|       styles[style] <- 0
+|   END FOR
+|
+|   // Proses validasi dan penghitungan jawaban user
+|   FOR i FROM 0 TO LENGTH(questions) - 1 DO
+|       selected <- AMBIL_RADIO_BUTTON_TERPILIH(NAME="q" + i)
+|       
+|       // Jika ada soal yang belum dijawab oleh user
+|       IF selected IS EMPTY THEN
+|           TAMPILKAN_ALERT("Jawab soal nomor " + (i + 1) + " dulu!")
+|           KELUAR_DARI_FUNGSI
+|       END IF
+|       
+|       answer <- AMBIL_VALUE(selected)
+|       _, style_points <- questions[i]["options"][answer]
+|       
+|       // Tambahkan +1 poin untuk setiap style yang ada pada jawaban pilihan user
+|       FOR EACH style IN style_points DO
+|           styles[style] <- styles[style] + 1
+|       END FOR
+|   END FOR
+|
+|   // Mencari skor tertinggi
+|   highest_score <- CARI_NILAI_MAKSIMUM(styles)
+|
+|   // Mengumpulkan style apa saja yang mendapatkan skor tertinggi tersebut
+|   DEKLARE results AS LIST OF STRING
+|   results <- ELEMEN_DENGAN_SKOR_TERTINGGI(styles, highest_score)
+|
+|   result_div <- AMBIL_ELEMEN_HTML_BY_ID("result")
+|
+|   // Tampilkan hasil akhir ke layar browser
+|   IF LENGTH(results) EQUALS 1 THEN
+|       result_div.text <- "Fashion style kamu adalah: " + UTAMAKAN_HURUF_BESAR(results[0])
+|   ELSE
+|       result_div.html <- "Fashion style kamu adalah kombinasi:<br>" + GABUNGKAN_DENGAN_BULLET_LIST(results)
+|   END IF
+|
+|--- END FUNGSI ---
